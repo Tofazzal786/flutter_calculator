@@ -26,16 +26,28 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-
-  final List<String>buttons = [
-    'c','DEL','%','/',
-    '9','8','7','*',
-    '6','5','4','-',
-    '3','2','1','+',
-    '0','.','ANS','=',
+  final List<String> buttons = [
+    'c',
+    'DEL',
+    '%',
+    '/',
+    '9',
+    '8',
+    '7',
+    '*',
+    '6',
+    '5',
+    '4',
+    '-',
+    '3',
+    '2',
+    '1',
+    '+',
+    '0',
+    '.',
+    'ANS',
+    '=',
   ];
-
 
   @override
   Widget build(BuildContext context) {
@@ -51,14 +63,27 @@ class _HomePageState extends State<HomePage> {
           child: Container(
             //SliverGridDelegateWithFixedCrossAxisCount Constructors
             child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
-              itemBuilder: (BuildContext context, int index){
-                return MyButton();
-              }
-            ),
+                itemCount: buttons.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4),
+                itemBuilder: (BuildContext context, int index) {
+                  return MyButton(
+                    buttonText: buttons[index],
+                    color: isOperator(buttons[index])? Colors.deepPurple : Colors.deepPurple[50],
+                    textcolor: isOperator(buttons[index])? Colors.white : Colors.deepPurple,
+                  );
+                }),
           ),
         ),
       ]),
     );
+  }
+
+
+  bool isOperator(String x){
+    if(x == '%' || x == '/' || x == '*' || x == '-' || x == '+' || x == '=' ){
+      return true;
+    }
+    return false;
   }
 }
